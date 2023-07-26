@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://classless.de/classless-tiny.css">
+	</head>
+	<body>
+		<h1>Pizza Order</h1>
+		<form action="http://176.58.109.141:3000/orders" method="post">
+			<label for="name">Name:</label><br>
+			<input type="text" id="name" name="name"><br>
+
+			<label for="addr1">Address 1:</label><br>
+			<input type="text" id="add1" name="addr1"><br>
+
+			<label for="village">Village:</label><br>
+			<input type="text" id="village" name="village"><br>
+
+			<label for="pizza">Pizza:</label><br>
+			<select id="pizza" name="pizza">
+				<option value="marg">Margherita</option>
+				<option value="mari">Marinara</option>
+			</select><br><br>
+
+			<input type="submit" value="Submit">
+		</form>
+
+		<br><hr><br>
+
+	</body>
+</html>
