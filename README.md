@@ -80,19 +80,46 @@ status text
 
 ## Demo
 
-- A 
+We start with an empty table
 
+![](table.jpg)
+
+We make an order in the point of sale UI
+
+![](ui.jpg)
+
+This triggers a Astra DB write and a Astra Streaming publish event
+
+![](table-row.jpg)
+
+The kitchen receives the event
+
+![](accepted.jpg)
+
+Cooks the pizza and sends an updated event with a status of 'cooking'
+
+![](cooking.jpg)
+
+Once finished, it sends an updated event with a status 'ready for delivery'
+
+![](ready.jpg)
+
+Our Pulsar client consumes this event and triggers a dummy SMS to the driver to notify them
+
+![](sms.jpg)
 
 ## Recommendations
+
+After enough orders, we can use historic data to provide pizza recommendations based on location and order time.
 
 I created a vectordb to test a simple recommendation method.
 
 Using dummy data, you can imagine the below weights for pizza orders. e.g. When someone orders a Marinara, 30% of the time it is at lunch and 40% of the time it is from Meriden.
 
-pizza | lunch | dinner | berkswell | balsall | meriden |
---------------------------------------------------------
-mari  | 0.3   | 0.7    | 0.1       | 0.5     | 0.4     |
-marg  | 0.6   | 0.4    | 0.2       | 0.4     | 0.4     |
+|pizza | lunch | dinner | berkswell | balsall | meriden |
+|------|-------|--------|-----------|---------|---------|
+|mari  | 0.3   | 0.7    | 0.1       | 0.5     | 0.4     |
+|marg  | 0.6   | 0.4    | 0.2       | 0.4     | 0.4     |
 
 We can load these into a table and use the similarity cosine function to find the approximate nearest neighbour.
 
@@ -109,12 +136,16 @@ INSERT INTO vectorpizza.pizza_vectors (pizza, pizza_vector)
 SELECT * FROM vectorpizza.pizza_vectors;"
 ```
 
+![](vectors.jpg)
+
 We can use this to find a recommendation for a pizza at Lunch time in Meriden
 ```
 astra db cqlsh pizzadb -e "SELECT pizza, similarity_cosine(pizza_vector, [1,0,1,0,0]) 
 AS similarity FROM vectorpizza.pizza_vectors ORDER BY pizza_vector 
 ANN OF [1,0,1,0,0] LIMIT 2;"
 ```
+
+![](rec.jpg)
 
 At Lunchtime in Meriden, we would recommend a Margherita!
 
