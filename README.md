@@ -55,8 +55,9 @@ Data                             AstraDB -- (Vector Search)
 ## Implementation Notes
 
 - Register for free datastax account
-- create our db and one keyspace per microservice
+- create our db and a keyspace for our microservice
 - downloaded SCB zip file via cli
+- created a svc account and set up astra-cli
 
 ```
 astra db create pizzadb -k pizza --if-not-exist --wait
@@ -75,8 +76,8 @@ status text
 
 - Created the streaming tenant in the UI (pizza)
 - Added an 'orders' topic to the default namescape
-- Stored all relevant secrets in environment variables
 - Wrote couple of apps to test the functionality
+- Stored all relevant secrets in environment variables
 
 ## Demo
 
