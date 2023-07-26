@@ -72,8 +72,6 @@ status text
 )"
 ```
 
-(i should have made the table name singular to follow proper conventions...)
-
 - Created the streaming tenant in the UI (pizza)
 - Added an 'orders' topic to the default namescape
 - Wrote couple of apps to test the functionality
@@ -83,31 +81,31 @@ status text
 
 We start with an empty table
 
-![](table.jpg)
+![](./images/table.jpg)
 
 We make an order in the point of sale UI
 
-![](ui.jpg)
+![](./images/ui.jpg)
 
 This triggers a Astra DB write and a Astra Streaming publish event
 
-![](table-row.jpg)
+![](./images/table-row.jpg)
 
 The kitchen receives the event
 
-![](accepted.jpg)
+![](./images/accepted.jpg)
 
 Cooks the pizza and sends an updated event with a status of 'cooking'
 
-![](cooking.jpg)
+![](./images/cooking.jpg)
 
 Once finished, it sends an updated event with a status 'ready for delivery'
 
-![](ready.jpg)
+![](./images/ready.jpg)
 
 Our Pulsar client consumes this event and triggers a dummy SMS to the driver to notify them
 
-![](sms.jpg)
+![](./images/sms.jpg)
 
 ## Recommendations
 
@@ -137,7 +135,7 @@ INSERT INTO vectorpizza.pizza_vectors (pizza, pizza_vector)
 SELECT * FROM vectorpizza.pizza_vectors;"
 ```
 
-![](vectors.jpg)
+![](./images/vectors.jpg)
 
 We can use this to find a recommendation for a pizza at Lunch time in Meriden
 ```
@@ -146,7 +144,7 @@ AS similarity FROM vectorpizza.pizza_vectors ORDER BY pizza_vector
 ANN OF [1,0,1,0,0] LIMIT 2;"
 ```
 
-![](rec.jpg)
+![](./images/rec.jpg)
 
 At Lunchtime in Meriden, we would recommend a Margherita!
 
