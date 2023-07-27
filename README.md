@@ -36,7 +36,7 @@ Feature:
 
 ```
 
-Clients    Point of sale client           Driver client         Kitchen client (Try it out in Astra)
+Clients    Point of sale client           Driver client (SMS)         Kitchen client (Try it out in Astra)
                   |                             |                    |
                   ----------------------------------------------------
                            |                            |
